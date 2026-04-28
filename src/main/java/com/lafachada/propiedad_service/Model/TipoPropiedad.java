@@ -15,12 +15,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class TipoPropiedad {
+    /*1: Propiedad */
+    /*2: Departamento*/
+    /*3: Hotel*/
     @Id
     @Column(name = "id_tipo_propiedad")
     private int idTipoPropiedad;
 
     @Column(nullable = false, unique = true)
-    private String nombre; // HOTEL, PRPOPIEDAD, DEPARTAMENTO
+    private String nombre;
 
     @OneToMany(mappedBy = "tipoPropiedad")
     private List<Propiedad> propiedades;

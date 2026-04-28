@@ -18,9 +18,10 @@ public class PropiedadRespuestaDTO {
     private double precio;
 
     private String direccion;
-    private String estadoNombre;
-    private String tipoNombre;
-    private String ciudadNombre;
+    private String estado;
+    private String tipo;
+    private String ciudad;
+    private String numeroUnidad;
 
     private List<String> fotosUrl = new ArrayList<>();
 
@@ -31,9 +32,9 @@ public class PropiedadRespuestaDTO {
         this.metraje              = p.getMetraje();
         this.precio               = p.getPrecio();
         this.direccion            = p.getDireccion();
-        this.estadoNombre         = p.getEstadoPropiedad().getNombre();
-        this.tipoNombre           = p.getTipoPropiedad().getNombre();
-        this.ciudadNombre         = p.getCiudad().getNombre();
+        this.estado               = p.getEstadoPropiedad().getNombre();
+        this.tipo                 = p.getTipoPropiedad().getNombre();
+        this.ciudad               = p.getCiudad().getNombre();
 
         if(!p.getFotos().isEmpty()) {
             for(Foto foto: p.getFotos()) {

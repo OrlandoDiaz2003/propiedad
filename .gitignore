@@ -6,6 +6,7 @@ target/
 
 .env
 scripts/
+export.sh
 
 ### STS ###
 .apt_generated

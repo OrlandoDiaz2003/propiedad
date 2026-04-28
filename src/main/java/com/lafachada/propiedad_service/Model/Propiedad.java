@@ -67,4 +67,7 @@ public class Propiedad {
 
     @Column(nullable = true, name = "id_cliente")
     private Integer idCliente;
+
+    @Column(nullable = true, name = "numero_unidad")
+    private String numeroUnidad;
 }
