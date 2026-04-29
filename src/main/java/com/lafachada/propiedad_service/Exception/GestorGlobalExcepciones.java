@@ -44,4 +44,13 @@ public class GestorGlobalExcepciones {
 
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> manejarCreacionPropiedad(IllegalArgumentException ex) {
+        Map<String, Object> cuerpo = new LinkedHashMap<>();
+        cuerpo.put("fecha / hora", LocalDateTime.now());
+        cuerpo.put("estado", HttpStatus.BAD_REQUEST.value());
+        cuerpo.put("error", ex.getLocalizedMessage());
+        return new ResponseEntity<>(cuerpo, HttpStatus.BAD_REQUEST);
+    }
+
 }

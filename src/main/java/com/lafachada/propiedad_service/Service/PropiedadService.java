@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.lafachada.propiedad_service.Dto.PropiedadRespuestaDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadSolicitudDTO;
+import com.lafachada.propiedad_service.Factory.PropiedadFactory;
+import com.lafachada.propiedad_service.Model.Ciudad;
+import com.lafachada.propiedad_service.Model.EstadoPropiedad;
 import com.lafachada.propiedad_service.Model.Propiedad;
+import com.lafachada.propiedad_service.Model.TipoPropiedad;
 import com.lafachada.propiedad_service.Repository.CiudadRepository;
 import com.lafachada.propiedad_service.Repository.EstadoPropiedadRepository;
 import com.lafachada.propiedad_service.Repository.PropiedadRepository;
@@ -25,6 +29,9 @@ public class PropiedadService {
     @Autowired
     private TipoPropiedadRepository tipoPropiedadRepository;
 
+    @Autowired
+    private PropiedadFactory propiedadFactory;
+
     public PropiedadRespuestaDTO obtenerPropiedadPorId(Integer id) {
         Propiedad propiedad = propiedadRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado propiedad con ID " + id));
@@ -33,27 +40,34 @@ public class PropiedadService {
         return propiedadDTO;
     }
 
-    public void subirPropiedad(PropiedadSolicitudDTO dto) {
-        Propiedad propiedad = new Propiedad();
+    public void crearPropiedad(PropiedadSolicitudDTO dto) {
+        TipoPropiedad tipoPropiedad = tipoPropiedadRepository.findById(dto.getIdTipoPropiedad())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "No se ha encontrado un tipo de propidad con id " + dto.getIdTipoPropiedad()));
 
-        propiedad.setDireccion(dto.getDireccion());
-        propiedad.setCantidadBaños(dto.getCantidadBaños());
-        propiedad.setCantidadHabitaciones(dto.getCantidadHabitaciones());
-        propiedad.setMetraje(dto.getMetraje());
-        propiedad.setPrecio(dto.getPrecio());
-        propiedad.setIdVendedor(dto.getIdVendedor());
-        propiedad.setIdCliente(dto.getIdCliente());
+        String nombreTipoPropiedad = tipoPropiedad.getNombre().toLowerCase();
+        //Validamos que si el tipo de propiedad es hotel o departamento esta no tenga una combinacion existente de direccion + numero de unidad
+        if (nombreTipoPropiedad.contains("hotel") || nombreTipoPropiedad.contains("departamento")) {
+            if (propiedadRepository.existsByDireccionAndNumeroUnidad(dto.getDireccion(), dto.getNumeroUnidad())) {
+                throw new IllegalArgumentException(
+                        "La direccion " + dto.getDireccion()+ ", " + dto.getNumeroUnidad() + " ya se encuentra registrada");
+            }
 
-        propiedad.setEstadoPropiedad(estadoPropiedadRepository.findById(dto.getIdEstadoPropiedad())
-                .orElseThrow(() -> new EntityNotFoundException("Estado de propiedad no valido intentelo otra vez")));
+        //validamos que si el tipo es una propidad tipo casa no tenga la misma direccion de otra ya registrada
+        } else {
+            if(propiedadRepository.existsByDireccionAndNumeroUnidadIsNull(dto.getDireccion())) {
+                throw new IllegalArgumentException("Ya existe una propiedad registrada en esa direccion");
+            }
+        }
 
-        propiedad.setCiudad(ciudadRepository.findById(dto.getIdCiudad())
-                .orElseThrow(() -> new EntityNotFoundException("Ciudad no encontrada")));
+        Ciudad ciudad = ciudadRepository.findById(dto.getIdCiudad()).orElseThrow(
+                () -> new EntityNotFoundException("No se ha encontrado una ciudad con id " + dto.getIdCiudad()));
 
-        propiedad.setTipoPropiedad(tipoPropiedadRepository.findById(dto.getIdTipoPropiedad())
-                .orElseThrow(() -> new EntityNotFoundException("Este tipo de propiedad no es valido")));
+        EstadoPropiedad estadoPropiedad = estadoPropiedadRepository.findById(dto.getIdEstadoPropiedad()).orElseThrow(
+                () -> new EntityNotFoundException(
+                        "No se ha encontrado un estado de propidad con id " + dto.getIdEstadoPropiedad()));
 
-        propiedadRepository.save(propiedad);
+        Propiedad propidadCreada = propiedadFactory.crearPropiedad(dto, ciudad, estadoPropiedad, tipoPropiedad);
+        propiedadRepository.save(propidadCreada);
     }
-
 }

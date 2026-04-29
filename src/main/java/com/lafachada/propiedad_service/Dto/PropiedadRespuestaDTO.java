@@ -35,6 +35,7 @@ public class PropiedadRespuestaDTO {
         this.estado               = p.getEstadoPropiedad().getNombre();
         this.tipo                 = p.getTipoPropiedad().getNombre();
         this.ciudad               = p.getCiudad().getNombre();
+        this.numeroUnidad         = p.getNumeroUnidad();
 
         if(!p.getFotos().isEmpty()) {
             for(Foto foto: p.getFotos()) {
