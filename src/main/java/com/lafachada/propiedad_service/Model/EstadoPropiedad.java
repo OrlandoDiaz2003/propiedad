@@ -19,12 +19,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class EstadoPropiedad {
+    /*
+
+    1. Disponible
+    2. Vendido
+    3. Reservado
+    4. Pendiente
+
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEstadoPropiedad;
 
     @Column(nullable = false, unique = true)
-    private String nombre; // DISPONIBLE, VENDIDO, RERSERVADA
+    private String nombre;
 
     @OneToMany(mappedBy = "estadoPropiedad")
     private List<Propiedad> propiedades;

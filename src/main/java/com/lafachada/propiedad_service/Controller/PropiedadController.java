@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lafachada.propiedad_service.Dto.PropiedadModificarDto;
 import com.lafachada.propiedad_service.Dto.PropiedadRespuestaDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadSolicitudDTO;
 import com.lafachada.propiedad_service.Service.PropiedadService;
@@ -14,19 +15,20 @@ import com.lafachada.propiedad_service.Service.PropiedadService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-@RequestMapping("api/v0/propiedades")
+@RequestMapping("api/v0/propiedad")
 @RestController
 public class PropiedadController {
 
     @Autowired
     private PropiedadService propiedadService;
 
-    @GetMapping("/obtenerPropiedadPorId/{id}")
+    @GetMapping("/obtenerPorId/{id}")
     public ResponseEntity<PropiedadRespuestaDTO> obtenerPropiedadPorId(@PathVariable Integer id) {
         PropiedadRespuestaDTO propiedad = propiedadService.obtenerPropiedadPorId(id);
         return ResponseEntity.ok(propiedad);
@@ -36,5 +38,11 @@ public class PropiedadController {
     public ResponseEntity<Void> crearPropiedad(@Valid @RequestBody PropiedadSolicitudDTO dto) {
         propiedadService.crearPropiedad(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PatchMapping("/modificar/{id}")
+    public ResponseEntity<Void> modificarPropiedad(@PathVariable Integer id, @Valid @RequestBody PropiedadModificarDto dto) {
+        propiedadService.modificarPropiedad(id, dto);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 }
