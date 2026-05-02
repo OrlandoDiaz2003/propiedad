@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lafachada.propiedad_service.Dto.PropiedadBuscarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadModificarDto;
 import com.lafachada.propiedad_service.Dto.PropiedadRespuestaDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadSolicitudDTO;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 @Controller
 @RequestMapping("api/v0/propiedad")
@@ -44,5 +48,11 @@ public class PropiedadController {
     public ResponseEntity<Void> modificarPropiedad(@PathVariable Integer id, @Valid @RequestBody PropiedadModificarDto dto) {
         propiedadService.modificarPropiedad(id, dto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Page<PropiedadRespuestaDTO>> buscar(@Valid PropiedadBuscarDTO dto, @PageableDefault(size = 10, page = 0) Pageable page){
+        Page<PropiedadRespuestaDTO> resultado = propiedadService.buscar(dto, page);
+        return ResponseEntity.ok(resultado);
     }
 }

@@ -2,6 +2,8 @@ package com.lafachada.propiedad_service.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,5 +28,6 @@ public class TipoPropiedad {
     private String nombre;
 
     @OneToMany(mappedBy = "tipoPropiedad")
+    @JsonIgnore
     private List<Propiedad> propiedades;
 }

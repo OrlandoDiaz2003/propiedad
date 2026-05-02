@@ -1,6 +1,9 @@
 package com.lafachada.propiedad_service.Model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +29,6 @@ public class Region {
     private String nombre;
 
     @OneToMany(mappedBy = "region")
+    @JsonIgnore
     private List<Ciudad> ciudades;
 }

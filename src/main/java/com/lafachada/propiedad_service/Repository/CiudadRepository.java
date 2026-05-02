@@ -7,4 +7,5 @@ import com.lafachada.propiedad_service.Model.Ciudad;
 public interface CiudadRepository extends JpaRepository <Ciudad,Integer> {
 
     Ciudad findByIdCiudad(int idCiudad);
+    Ciudad findByNombre(String nombre);
 }
