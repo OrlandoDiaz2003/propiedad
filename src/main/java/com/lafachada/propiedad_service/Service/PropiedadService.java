@@ -104,10 +104,8 @@ public class PropiedadService {
             EstadoPropiedad nuevoEstadoPropiedad = estadoPropiedadRepository.findById(dto.getEstadoPropiedad())
                     .orElseThrow(() -> new EntityNotFoundException(
                             "No se ha encontrado un estado de propiedad con id " + dto.getEstadoPropiedad()));
-
             p.setEstadoPropiedad(nuevoEstadoPropiedad);
         }
-
         propiedadRepository.save(p);
     }
 
@@ -136,5 +134,12 @@ public class PropiedadService {
         Page<Propiedad> entidades = propiedadRepository.findAll(spec, pageable);
 
         return entidades.map(propidades -> new PropiedadRespuestaDTO(propidades));
+    }
+
+    public void eliminarPropiedad(Integer id) {
+        if (!propiedadRepository.existsById(id)) {
+            throw new EntityNotFoundException("No se ha encontrado una propiedad con id " + id);
+        }
+        propiedadRepository.deleteById(id);
     }
 }

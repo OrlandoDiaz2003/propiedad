@@ -15,6 +15,7 @@ import com.lafachada.propiedad_service.Service.PropiedadService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,5 +55,11 @@ public class PropiedadController {
     public ResponseEntity<Page<PropiedadRespuestaDTO>> buscar(@Valid PropiedadBuscarDTO dto, @PageableDefault(size = 10, page = 0) Pageable page){
         Page<PropiedadRespuestaDTO> resultado = propiedadService.buscar(dto, page);
         return ResponseEntity.ok(resultado);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarPropiedad(@PathVariable Integer id) {
+        propiedadService.eliminarPropiedad(id);
+        return ResponseEntity.noContent().build();
     }
 }
