@@ -25,7 +25,7 @@ public class PropiedadSolicitudDTO {
     private Integer metraje;
 
     @NotNull(message = "El precio no puede estar vacio")
-    @Min(value = 1, message = "El precio deber mayor a 0")
+    @Min(value = 1, message = "El precio debe ser mayor a 0")
     private Double precio;
 
     @NotNull(message = "Una propiedad tiene que estar asociada a un id de vendedor")
