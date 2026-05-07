@@ -41,7 +41,7 @@ El proyecto incluye un `Makefile` para facilitar la ejecución de comandos comun
 ### 1. Obtener Propiedad por ID
 Obtiene los detalles de una propiedad específica.
 
-- **URL:** `/api/v0/propiedad/obtenerPorId/{id}`
+- **URL:** `/api/v0/propiedad/{id}`
 - **Método:** `GET`
 - **Respuesta Exitosa (200 OK):**
   ```json
@@ -63,7 +63,7 @@ Obtiene los detalles de una propiedad específica.
 ### 2. Crear Propiedad
 Registra una nueva propiedad en el sistema.
 
-- **URL:** `/api/v0/propiedad/crear`
+- **URL:** `/api/v0/propiedad/`
 - **Método:** `POST`
 - **Cuerpo de la Petición (JSON):**
   ```json
@@ -89,7 +89,7 @@ Registra una nueva propiedad en el sistema.
 ### 3. Modificar Propiedad
 Actualiza parcialmente los datos de una propiedad existente.
 
-- **URL:** `/api/v0/propiedad/modificar/{id}`
+- **URL:** `/api/v0/propiedad/{id}`
 - **Método:** `PATCH`
 - **Cuerpo de la Petición (JSON):**
   ```json
@@ -104,13 +104,13 @@ Actualiza parcialmente los datos de una propiedad existente.
 ### 4. Buscar Propiedades
 Busca propiedades con filtros y paginación.
 
-- **URL:** `/api/v0/propiedad/buscar`
+- **URL:** `/api/v0/propiedad/`
 - **Método:** `GET`
 - **Parámetros (Query Params):**
   - Todos son **opcionales**: `direccion`, `ciudad`, `precioMin`, `precioMax`, `metrajeMin`, `metrajeMax`, `tipoPropiedad`, `page`, `size`.
 
 ### 5. Eliminar Propiedad
-- **URL:** `/api/v0/propiedad/eliminar/{id}`
+- **URL:** `/api/v0/propiedad/{id}`
 - **Método:** `DELETE`
 
 ---

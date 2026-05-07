@@ -2,17 +2,16 @@ package com.lafachada.propiedad_service.Specs;
 
 import org.springframework.data.jpa.domain.PredicateSpecification;
 
-import com.lafachada.propiedad_service.Model.Ciudad;
 import com.lafachada.propiedad_service.Model.Propiedad;
 import com.lafachada.propiedad_service.Model.TipoPropiedad;
 
 public class PropiedadSpecs {
-    public static PredicateSpecification<Propiedad> propiedadEnCiudad(Ciudad ciudad) {
+    public static PredicateSpecification<Propiedad> propiedadEnCiudad(String ciudad) {
+        if(ciudad == null || ciudad.isBlank()) {
+            return null;
+        }
         return (from, builder) -> {
-            if (ciudad == null || ciudad.getNombre() == null) {
-                return null;
-            }
-            return builder.like(from.get("ciudad").get("nombre"), ciudad.getNombre());
+            return builder.like(from.get("ciudad").get("nombre"), "%"+ciudad.toLowerCase()+"%");
         };
     }
 

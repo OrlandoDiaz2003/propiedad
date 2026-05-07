@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 public class PropiedadRespuestaDTO {
-    private Integer id;
+    private Integer propiedadId;
 
     private int cantidadBaños;
     private int cantidadHabitaciones;
@@ -26,7 +26,7 @@ public class PropiedadRespuestaDTO {
     private List<String> fotosUrl = new ArrayList<>();
 
     public PropiedadRespuestaDTO(Propiedad p) {
-        this.id                   = p.getIdPropiedad();
+        this.propiedadId          = p.getIdPropiedad();
         this.cantidadBaños        = p.getCantidadBaños();
         this.cantidadHabitaciones = p.getCantidadHabitaciones();
         this.metraje              = p.getMetraje();

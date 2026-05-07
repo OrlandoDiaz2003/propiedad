@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.domain.Pageable;
 
 import com.lafachada.propiedad_service.Dto.PropiedadBuscarDTO;
-import com.lafachada.propiedad_service.Dto.PropiedadModificarDto;
+import com.lafachada.propiedad_service.Dto.PropiedadModificarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadRespuestaDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadSolicitudDTO;
 import com.lafachada.propiedad_service.Factory.PropiedadFactory;
@@ -27,17 +27,21 @@ import jakarta.transaction.Transactional;
 @Service
 public class PropiedadService {
 
-    @Autowired
     private PropiedadRepository propiedadRepository;
-    @Autowired
     private EstadoPropiedadRepository estadoPropiedadRepository;
-    @Autowired
     private CiudadRepository ciudadRepository;
-    @Autowired
     private TipoPropiedadRepository tipoPropiedadRepository;
-
-    @Autowired
     private PropiedadFactory propiedadFactory;
+
+    public PropiedadService(PropiedadRepository propiedadRepository,
+            EstadoPropiedadRepository estadoPropiedadRepository, CiudadRepository ciudadRepository,
+            TipoPropiedadRepository tipoPropiedadRepository, PropiedadFactory propiedadFactory) {
+        this.propiedadRepository = propiedadRepository;
+        this.estadoPropiedadRepository = estadoPropiedadRepository;
+        this.ciudadRepository = ciudadRepository;
+        this.tipoPropiedadRepository = tipoPropiedadRepository;
+        this.propiedadFactory = propiedadFactory;
+    }
 
     public PropiedadRespuestaDTO obtenerPropiedadPorId(Integer id) {
         Propiedad propiedad = propiedadRepository.findById(id)
@@ -47,6 +51,7 @@ public class PropiedadService {
         return propiedadDTO;
     }
 
+    @Transactional
     public void crearPropiedad(PropiedadSolicitudDTO dto) {
         TipoPropiedad tipoPropiedad = tipoPropiedadRepository.findById(dto.getIdTipoPropiedad())
                 .orElseThrow(() -> new EntityNotFoundException(
@@ -84,7 +89,7 @@ public class PropiedadService {
     }
 
     @Transactional
-    public void modificarPropiedad(Integer id, PropiedadModificarDto dto) {
+    public void modificarPropiedad(Integer id, PropiedadModificarDTO dto) {
         Propiedad p = propiedadRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado una propiedad con id " + id));
 
@@ -116,10 +121,10 @@ public class PropiedadService {
                     .orElseThrow(() -> new EntityNotFoundException(
                             "No se ha encontrado tipo de propiedad con id " + dto.getTipoPropiedad()));
         }
-        Ciudad ciudad = null;
+        String ciudad = null;
         if (dto.getCiudad() != null) {
             if (!dto.getCiudad().isBlank()) {
-                ciudad = ciudadRepository.findByNombre(dto.getCiudad());
+                ciudad = dto.getCiudad();
             }
         }
 

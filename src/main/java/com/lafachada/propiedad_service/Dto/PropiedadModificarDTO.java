@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 @Data
-public class PropiedadModificarDto {
+public class PropiedadModificarDTO {
     @Min(value = 1, message = "La propiedad debe tener minimo 1 habitacion")
     private Integer cantidadHabitaciones;
 
