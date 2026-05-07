@@ -1,10 +1,9 @@
 package com.lafachada.propiedad_service.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import com.lafachada.propiedad_service.Dto.PropiedadBuscarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadModificarDTO;
@@ -129,13 +128,15 @@ public class PropiedadService {
         }
 
         dto.validarRangos();
-        Specification<Propiedad> spec = Specification.where(PropiedadSpecs.propiedadEnCiudad(ciudad))
-                .and(PropiedadSpecs.propiedadCantidadHabitaciones(dto.getCantidadHabitaciones()))
+        Specification<Propiedad> spec = Specification
+                .where(PropiedadSpecs.propiedadEnCiudad(ciudad))
                 .and(PropiedadSpecs.propiedadTipoPropiedad(tipoPropiedad))
+                .and(PropiedadSpecs.propiedadCantidadHabitaciones(dto.getCantidadHabitaciones()))
                 .and(PropiedadSpecs.propiedadPrecioMax(dto.getPrecioMax()))
                 .and(PropiedadSpecs.propiedadPrecioMin(dto.getPrecioMin()))
                 .and(PropiedadSpecs.propiedadMetrajeMax(dto.getMetrajeMax()))
                 .and(PropiedadSpecs.propiedadMetrajeMin(dto.getMetrajeMin()));
+
         Page<Propiedad> entidades = propiedadRepository.findAll(spec, pageable);
 
         return entidades.map(propidades -> new PropiedadRespuestaDTO(propidades));
