@@ -10,6 +10,7 @@ import com.lafachada.propiedad_service.Dto.PropiedadBuscarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadModificarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadRespuestaDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadSolicitudDTO;
+import com.lafachada.propiedad_service.Model.Propiedad;
 import com.lafachada.propiedad_service.Service.PropiedadService;
 
 import jakarta.validation.Valid;
@@ -41,9 +42,9 @@ public class PropiedadController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> crearPropiedad(@Valid @RequestBody PropiedadSolicitudDTO dto) {
-        propiedadService.crearPropiedad(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Propiedad> crearPropiedad(@Valid @RequestBody PropiedadSolicitudDTO dto) {
+        Propiedad pro = propiedadService.crearPropiedad(dto);
+        return ResponseEntity.ok(pro);
     }
 
     @PatchMapping("/{id}")

@@ -51,7 +51,7 @@ public class PropiedadService {
     }
 
     @Transactional
-    public void crearPropiedad(PropiedadSolicitudDTO dto) {
+    public Propiedad crearPropiedad(PropiedadSolicitudDTO dto) {
         TipoPropiedad tipoPropiedad = tipoPropiedadRepository.findById(dto.getIdTipoPropiedad())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "No se ha encontrado un tipo de propidad con id " + dto.getIdTipoPropiedad()));
@@ -84,7 +84,7 @@ public class PropiedadService {
                         "No se ha encontrado un estado de propidad con id " + dto.getIdEstadoPropiedad()));
 
         Propiedad propidadCreada = propiedadFactory.crearPropiedad(dto, ciudad, estadoPropiedad, tipoPropiedad);
-        propiedadRepository.save(propidadCreada);
+        return propiedadRepository.save(propidadCreada);
     }
 
     @Transactional
