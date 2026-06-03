@@ -14,12 +14,6 @@ public class PropiedadBuscarDTO {
 
     private String ciudad;
 
-    @PositiveOrZero(message="El precio no puede ser negativo")
-    private Double precioMin;
-
-    @PositiveOrZero(message="El precio no puede ser negativo")
-    private Double precioMax;
-
     @PositiveOrZero(message = "El metraje no puede ser negativo")
     private Integer metrajeMin;
 
@@ -34,9 +28,6 @@ public class PropiedadBuscarDTO {
     }
 
     public void validarRangos(){
-        if(!esRangoValido(this.precioMin, this.precioMax)){
-            throw new IllegalArgumentException("El rango de precio no es valido");
-        }
         if(!esRangoValido(this.metrajeMin, this.metrajeMax)){
             throw new IllegalArgumentException("El rango de metraje no es valido");
         }

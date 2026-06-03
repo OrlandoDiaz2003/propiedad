@@ -15,7 +15,6 @@ public class PropiedadRespuestaDTO {
     private int cantidadBaños;
     private int cantidadHabitaciones;
     private int metraje;
-    private double precio;
 
     private String direccion;
     private String estado;
@@ -30,7 +29,6 @@ public class PropiedadRespuestaDTO {
         this.cantidadBaños        = p.getCantidadBaños();
         this.cantidadHabitaciones = p.getCantidadHabitaciones();
         this.metraje              = p.getMetraje();
-        this.precio               = p.getPrecio();
         this.direccion            = p.getDireccion();
         this.estado               = p.getEstadoPropiedad().getNombre();
         this.tipo                 = p.getTipoPropiedad().getNombre();

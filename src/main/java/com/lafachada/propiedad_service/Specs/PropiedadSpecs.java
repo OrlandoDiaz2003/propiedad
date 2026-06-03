@@ -13,20 +13,6 @@ public class PropiedadSpecs {
         };
     }
 
-    public static Specification<Propiedad> propiedadPrecioMin(Double min) {
-        return (from, query, builder) -> {
-            if (min == null || min <= 0) return null;
-            return builder.greaterThanOrEqualTo(from.get("precio"), min);
-        };
-    }
-
-    public static Specification<Propiedad> propiedadPrecioMax(Double max) {
-        return (from, query, builder) -> {
-            if (max == null || max <= 0) return null;
-            return builder.lessThanOrEqualTo(from.get("precio"), max);
-        };
-    }
-
     public static Specification<Propiedad> propiedadMetrajeMin(Integer min) {
         return (from, query, builder) -> {
             if (min == null || min <= 0) return null;
