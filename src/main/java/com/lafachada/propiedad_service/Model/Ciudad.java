@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,6 +25,7 @@ import lombok.NoArgsConstructor;
 public class Ciudad {
     @Id
     @Column(nullable = false, name = "id_ciudad")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCiudad;
 
     @Column(nullable = false)

@@ -4,10 +4,10 @@ services:
     container_name: mariadb-propiedad
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MARIADB_DATABASE: ${DB_NAME} 
-      MARIADB_USER: ${DB_USER} 
-      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: test_propiedad 
+      MARIADB_USER: propiedad_test_user
+      MARIADB_PASSWORD: 1234
+      MARIADB_ROOT_PASSWORD: 1234 
     ports:
       - "3309:3306"
     volumes:
@@ -28,11 +28,11 @@ services:
       mariadb-db:
         condition: service_healthy
     environment:
-     - DB_HOST=${DB_HOST}
-     - DB_PORT=${DB_PORT}
-     - DB_NAME=${DB_NAME}
-     - DB_USER=${DB_USER}
-     - DB_PASSWORD=${DB_PASSWORD}
+     - DB_HOST=mariadb-db
+     - DB_PORT=3306
+     - DB_NAME=test_propiedad
+     - DB_USER=propiedad_test_user
+     - DB_PASSWORD=1234
     ports:
      - "8081:8081"
     networks:
