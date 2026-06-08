@@ -26,7 +26,6 @@ public class PropiedadFactory {
         propiedad.setNumeroUnidad(dto.getNumeroUnidad());
         propiedad.setMetraje(dto.getMetraje());
         propiedad.setIdVendedor(dto.getIdVendedor());
-        propiedad.setPrecio(dto.getPrecio());
         return propiedad;
     }
 

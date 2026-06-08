@@ -92,8 +92,6 @@ public class PropiedadService {
         Propiedad p = propiedadRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado una propiedad con id " + id));
 
-        if (dto.getPrecio() != null)
-            p.setPrecio(dto.getPrecio());
         if (dto.getMetraje() != null)
             p.setMetraje(dto.getMetraje());
 
@@ -132,8 +130,6 @@ public class PropiedadService {
                 .where(PropiedadSpecs.propiedadEnCiudad(ciudad))
                 .and(PropiedadSpecs.propiedadTipoPropiedad(tipoPropiedad))
                 .and(PropiedadSpecs.propiedadCantidadHabitaciones(dto.getCantidadHabitaciones()))
-                .and(PropiedadSpecs.propiedadPrecioMax(dto.getPrecioMax()))
-                .and(PropiedadSpecs.propiedadPrecioMin(dto.getPrecioMin()))
                 .and(PropiedadSpecs.propiedadMetrajeMax(dto.getMetrajeMax()))
                 .and(PropiedadSpecs.propiedadMetrajeMin(dto.getMetrajeMin()));
 

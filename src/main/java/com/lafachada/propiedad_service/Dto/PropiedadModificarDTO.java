@@ -14,9 +14,6 @@ public class PropiedadModificarDTO {
     @Min(value = 1, message = "El metraje tiene que ser mayor a 0")
     private Integer metraje;
 
-    @Min(value = 1, message = "El precio tiene que ser mayor que 0")
-    private Double  precio;
-
     @Min(value = 1, message = "El id de estado de propiedad tiene que ser mayor a 0")
     private Integer estadoPropiedad;
 

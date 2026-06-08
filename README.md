@@ -50,7 +50,6 @@ Obtiene los detalles de una propiedad específica.
     "cantidadBaños": 2,
     "cantidadHabitaciones": 3,
     "metraje": 120,
-    "precio": 250000.0,
     "direccion": "Calle Falsa 123",
     "estado": "Disponible",
     "tipo": "Casa",
@@ -72,7 +71,6 @@ Registra una nueva propiedad en el sistema.
     "cantidadBaños": 2,
     "cantidadHabitaciones": 3,
     "metraje": 100,
-    "precio": 150000.0,
     "idVendedor": 1,
     "idTipoPropiedad": 1,
     "idEstadoPropiedad": 1,
@@ -95,11 +93,10 @@ Actualiza parcialmente los datos de una propiedad existente.
   ```json
   {
     "cantidadHabitaciones": 4,
-    "precio": 160000.0
   }
   ```
 - **Notas sobre Parámetros:**
-  - **Todos los parámetros son opcionales** (`cantidadHabitaciones`, `cantidadBaños`, `metraje`, `precio`, `estadoPropiedad`, `idCliente`). Solo se actualizarán los campos enviados.
+  - **Todos los parámetros son opcionales** (`cantidadHabitaciones`, `cantidadBaños`, `metraje`, `estadoPropiedad`, `idCliente`). Solo se actualizarán los campos enviados.
 
 ### 4. Buscar Propiedades
 Busca propiedades con filtros y paginación.
@@ -107,7 +104,7 @@ Busca propiedades con filtros y paginación.
 - **URL:** `/api/v0/propiedad/`
 - **Método:** `GET`
 - **Parámetros (Query Params):**
-  - Todos son **opcionales**: `direccion`, `ciudad`, `precioMin`, `precioMax`, `metrajeMin`, `metrajeMax`, `tipoPropiedad`, `page`, `size`.
+  - Todos son **opcionales**: `direccion`, `ciudad`, `metrajeMin`, `metrajeMax`, `tipoPropiedad`, `page`, `size`.
 
 ### 5. Eliminar Propiedad
 - **URL:** `/api/v0/propiedad/{id}`
@@ -142,7 +139,6 @@ Se lanza cuando los datos enviados en el cuerpo de la petición (`@Valid`) no cu
   "estado": 400,
   "error": {
     "cantidadHabitaciones": "La propiedad debe tener minimo una habitacion",
-    "precio": "El precio debe ser mayor a 0",
     "direccion": "La direccion no puede estar vacia"
   }
 }
@@ -152,7 +148,7 @@ Se lanza cuando los datos enviados en el cuerpo de la petición (`@Valid`) no cu
 Se lanza cuando los datos son sintácticamente correctos pero violan reglas de negocio, como:
 - Intentar registrar una dirección que ya existe.
 - Omitir el `numeroUnidad` en departamentos u hoteles.
-- Rangos de búsqueda inválidos (ej. `precioMin` mayor que `precioMax`).
+- Rangos de búsqueda inválidos (ej. `metrajeMin` mayor que `metrajeMax`).
 
 **Ejemplo de respuesta:**
 ```json

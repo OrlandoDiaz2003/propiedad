@@ -3,6 +3,14 @@ export
 
 .PHONY: run build test clean
 
+docker-test:
+	docker compose -f docker-compose.local.yml up -d
+
+docker-clean:
+	docker compose down -v
+
+docker-log:
+	docker logs --follow microservicio-propiedad
 run:
 	.\mvnw spring-boot:run
 

@@ -51,9 +51,6 @@ public class Propiedad {
     @Column(nullable = false)
     private int metraje;
 
-    @Column(nullable = false)
-    private double precio;
-
     @OneToMany(mappedBy = "propiedad", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Foto> fotos = new ArrayList<>();
 

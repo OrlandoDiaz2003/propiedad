@@ -1,0 +1,45 @@
+services:
+  mariadb-db:
+    image: mariadb:latest
+    container_name: mariadb-propiedad
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME} 
+      MARIADB_USER: ${DB_USER} 
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3309:3306"
+    volumes:
+      - mariadb_propiedad_data:/var/lib/mysql
+    networks:
+     - lafachada-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  propiedad-service:
+    build: .
+    container_name: microservicio-propiedad
+    restart: always
+    depends_on:
+      mariadb-db:
+        condition: service_healthy
+    environment:
+     - DB_HOST=${DB_HOST}
+     - DB_PORT=${DB_PORT}
+     - DB_NAME=${DB_NAME}
+     - DB_USER=${DB_USER}
+     - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+     - "8081:8081"
+    networks:
+     - lafachada-network
+volumes:
+  mariadb_propiedad_data:
+
+networks:
+  lafachada-network:
+    external: true
