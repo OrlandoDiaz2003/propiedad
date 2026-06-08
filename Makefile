@@ -4,18 +4,18 @@ export
 .PHONY: run build test clean
 
 run:
-	./mvnw spring-boot:run
+	.\mvnw spring-boot:run
 
 compile:
-	./mvnw compile
+	.\mvnw compile
 
 package:
-	./mvnw package
+	.\mvnw package
 
 clean:
-	./mvnw clean
+	.\mvnw clean
 
 test:
-	./mvnw test
+	.\mvnw test
 
 build: clean package
