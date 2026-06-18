@@ -1,5 +1,5 @@
 services:
-  mariadb-db:
+  mariadb-propiedad-db:
     image: mariadb:latest
     container_name: mariadb-propiedad
     restart: always
@@ -25,10 +25,10 @@ services:
     container_name: microservicio-propiedad
     restart: always
     depends_on:
-      mariadb-db:
+      mariadb-propiedad-db:
         condition: service_healthy
     environment:
-     - DB_HOST=mariadb-db
+     - DB_HOST=mariadb-propiedad
      - DB_PORT=3306
      - DB_NAME=test_propiedad
      - DB_USER=propiedad_test_user

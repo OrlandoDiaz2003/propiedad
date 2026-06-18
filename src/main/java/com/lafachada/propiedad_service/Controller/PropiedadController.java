@@ -29,7 +29,7 @@ import org.springframework.data.web.PageableDefault;
 @RestController
 public class PropiedadController {
 
-    private PropiedadService propiedadService;
+    private final PropiedadService propiedadService;
 
     public PropiedadController(PropiedadService propiedadService) {
         this.propiedadService = propiedadService;

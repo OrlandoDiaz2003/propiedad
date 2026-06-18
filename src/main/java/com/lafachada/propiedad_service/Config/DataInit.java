@@ -68,8 +68,8 @@ public class DataInit implements CommandLineRunner {
             Map<String, List<String>> ciudadesPorRegion = obtenerCiudadesPorRegion();
             ciudadesPorRegion.forEach((nombreRegion, listaCiudades) -> {
                 Region region = regionRepository.findByNombre(nombreRegion);
-                if(region != null) {
-                    for (String nombreCiudad: listaCiudades) {
+                if (region != null) {
+                    for (String nombreCiudad : listaCiudades) {
                         Ciudad ciudad = new Ciudad();
                         ciudad.setNombre(nombreCiudad);
                         ciudad.setRegion(region);

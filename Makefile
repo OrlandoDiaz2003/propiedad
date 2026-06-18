@@ -4,13 +4,14 @@ export
 .PHONY: run build test clean
 
 docker-test:
-	docker compose -f docker-compose.local.yml up -d
+	docker compose -f docker-compose.local.yml up --build 
 
 docker-clean:
 	docker compose down -v
 
-docker-log:
-	docker logs --follow microservicio-propiedad
+docker-db:
+	docker exec -it mariadb-propiedad mariadb -u propiedad_test_user -p${DB_PASSWORD_LOCAL}
+
 run:
 	./mvnw spring-boot:run
 

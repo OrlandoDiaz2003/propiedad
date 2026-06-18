@@ -26,11 +26,11 @@ import jakarta.transaction.Transactional;
 @Service
 public class PropiedadService {
 
-    private PropiedadRepository propiedadRepository;
-    private EstadoPropiedadRepository estadoPropiedadRepository;
-    private CiudadRepository ciudadRepository;
-    private TipoPropiedadRepository tipoPropiedadRepository;
-    private PropiedadFactory propiedadFactory;
+    private final PropiedadRepository propiedadRepository;
+    private final EstadoPropiedadRepository estadoPropiedadRepository;
+    private final CiudadRepository ciudadRepository;
+    private final TipoPropiedadRepository tipoPropiedadRepository;
+    private final PropiedadFactory propiedadFactory;
 
     public PropiedadService(PropiedadRepository propiedadRepository,
             EstadoPropiedadRepository estadoPropiedadRepository, CiudadRepository ciudadRepository,
