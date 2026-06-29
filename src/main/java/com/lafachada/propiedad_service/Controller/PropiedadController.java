@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -45,6 +48,12 @@ public class PropiedadController {
     public ResponseEntity<Propiedad> crearPropiedad(@Valid @RequestBody PropiedadSolicitudDTO dto) {
         Propiedad pro = propiedadService.crearPropiedad(dto);
         return ResponseEntity.ok(pro);
+    }
+
+    @GetMapping("ciudad/{id}")
+    public ResponseEntity<List<Integer>> buscarPorCiudad(@PathVariable Integer id) {
+        List<Integer> propiedades = propiedadService.buscarPorCiudad(id);
+        return ResponseEntity.ok(propiedades);
     }
 
     @PatchMapping("/{id}")

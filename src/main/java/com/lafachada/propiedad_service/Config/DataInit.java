@@ -1,5 +1,6 @@
 package com.lafachada.propiedad_service.Config;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,15 +98,17 @@ public class DataInit implements CommandLineRunner {
     }
 
     private Map<String, List<String>> obtenerCiudadesPorRegion() {
-        return Map.of(
-                "valparaiso", List.of("viña del mar", "valparaíso"),
-                "metropolitana", List.of("santiago"),
-                "biobío", List.of("concepción"),
-                "antofagasta", List.of("antofagasta", "calama"),
-                "coquimbo", List.of("la serena", "coquimbo"),
-                "o'higgins", List.of("rancagua"),
-                "maule", List.of("talca"),
-                "los lagos", List.of("puerto montt"),
-                "magallanes", List.of("punta arenas"));
+        Map<String, List<String>> map = new LinkedHashMap<>();
+
+        map.put("valparaiso", List.of("viña del mar", "valparaíso"));
+        map.put("metropolitana", List.of("santiago"));
+        map.put("biobío", List.of("concepción"));
+        map.put("antofagasta", List.of("antofagasta", "calama"));
+        map.put("coquimbo", List.of("la serena", "coquimbo"));
+        map.put("o'higgins", List.of("rancagua"));
+        map.put("maule", List.of("talca"));
+        map.put("los lagos", List.of("puerto montt"));
+        map.put("magallanes", List.of("punta arenas"));
+        return map;
     }
 }
