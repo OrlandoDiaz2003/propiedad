@@ -67,4 +67,9 @@ public class Propiedad {
 
     @Column(nullable = true, name = "numero_unidad")
     private String numeroUnidad;
+
+    public void setId(Integer id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
 }

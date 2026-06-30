@@ -7,8 +7,10 @@ import com.lafachada.propiedad_service.Model.Foto;
 import com.lafachada.propiedad_service.Model.Propiedad;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PropiedadRespuestaDTO {
     private Integer propiedadId;
 
