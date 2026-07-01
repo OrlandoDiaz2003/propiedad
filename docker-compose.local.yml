@@ -1,19 +1,21 @@
+version: '3.8'
+
 services:
   mariadb-db:
     image: mariadb:latest
     container_name: mariadb-propiedad
     restart: always
     environment:
-      MARIADB_DATABASE: test_propiedad 
-      MARIADB_USER: propiedad_test_user
-      MARIADB_PASSWORD: 1234
-      MARIADB_ROOT_PASSWORD: 1234 
+      - MARIADB_DATABASE=test_propiedad
+      - MARIADB_USER=root
+      - MARIADB_PASSWORD=1234
+      - MARIADB_ROOT_PASSWORD=1234
     ports:
       - "3309:3306"
     volumes:
       - mariadb_propiedad_data:/var/lib/mysql
     networks:
-     - lafachada-network
+      - lafachada-network
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
@@ -28,18 +30,21 @@ services:
       mariadb-db:
         condition: service_healthy
     environment:
-     - DB_HOST=mariadb-db
-     - DB_PORT=3306
-     - DB_NAME=test_propiedad
-     - DB_USER=propiedad_test_user
-     - DB_PASSWORD=1234
+      # 💡 Corregido: Ahora apunta a "mariadb-propiedad" (el host real dentro de tu red Docker)
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-propiedad:3306/test_propiedad
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SECURITY_JWT_SECRET=${JWT_SECRET}
     ports:
-     - "8081:8081"
+      - "8081:8081"
     networks:
-     - lafachada-network
+      - lafachada-network
+
 volumes:
   mariadb_propiedad_data:
 
 networks:
   lafachada-network:
     external: true
+
+
