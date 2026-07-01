@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+
 import com.lafachada.propiedad_service.Dto.PropiedadBuscarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadModificarDTO;
 import com.lafachada.propiedad_service.Dto.PropiedadRespuestaDTO;
