@@ -12,6 +12,7 @@ public class PropiedadBuscarDTO {
     @PositiveOrZero(message="La cantidad de habitaciones no puede ser menor a 0")
     private Integer cantidadHabitaciones;
 
+    @PositiveOrZero(message="La cantidad de baños no puede ser menor a 0")
     private String ciudad;
 
     @PositiveOrZero(message = "El metraje no puede ser negativo")

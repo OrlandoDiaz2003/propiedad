@@ -15,7 +15,7 @@ public class PropiedadFactory {
             TipoPropiedad tipoPropiedad) {
 
         validarTipo(dto, tipoPropiedad);
-
+                    // Crear la propiedad con los datos proporcionados
         Propiedad propiedad = new Propiedad();
         propiedad.setDireccion(dto.getDireccion());
         propiedad.setCantidadBaños(dto.getCantidadBaños());
