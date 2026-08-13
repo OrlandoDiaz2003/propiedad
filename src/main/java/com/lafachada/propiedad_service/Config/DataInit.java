@@ -96,6 +96,8 @@ public class DataInit implements CommandLineRunner {
                 "antofagasta", "o'higgins", "maule", "los lagos", "magallanes");
     }
 
+
+    
     private Map<String, List<String>> obtenerCiudadesPorRegion() {
         return Map.of(
                 "valparaiso", List.of("viña del mar", "valparaíso"),
